@@ -1,6 +1,7 @@
 package cie
 
 import (
+	"image/color"
 	"math"
 )
 
@@ -15,6 +16,10 @@ type Lab struct {
 	L int8
 	A int8
 	B int8
+}
+
+func LabFromRGB(c color.RGBA) Lab {
+	return LabFromXYZ(XYZFromRGB(c))
 }
 
 func LabFromXYZ(c XYZ) Lab {
