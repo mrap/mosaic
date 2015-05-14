@@ -9,8 +9,8 @@ func AvgRGBA(img image.Image) color.RGBA {
 	bounds := img.Bounds()
 	var _r, _g, _b, _a uint32
 
-	for y := bounds.Min.Y; y <= bounds.Max.Y; y++ {
-		for x := bounds.Min.X; x <= bounds.Max.X; x++ {
+	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
+		for x := bounds.Min.X; x < bounds.Max.X; x++ {
 			r, g, b, a := img.At(x, y).RGBA()
 			_a += (a >> 24 & 0xFF)
 			_r += (r >> 16 & 0xFF)
@@ -19,12 +19,12 @@ func AvgRGBA(img image.Image) color.RGBA {
 		}
 	}
 
-	pixels := bounds.Max.X * bounds.Max.Y
+	pixels := float32((bounds.Max.X - bounds.Min.X) * (bounds.Max.Y - bounds.Min.Y))
 
 	return color.RGBA{
-		uint8(int(_r) / pixels),
-		uint8(int(_g) / pixels),
-		uint8(int(_b) / pixels),
-		uint8(int(_a) / pixels),
+		uint8(float32(_r) / pixels),
+		uint8(float32(_g) / pixels),
+		uint8(float32(_b) / pixels),
+		uint8(float32(_a) / pixels),
 	}
 }
