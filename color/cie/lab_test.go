@@ -26,3 +26,15 @@ func TestLabFromRGB(t *testing.T) {
 		t.Error("Lab B is not correct")
 	}
 }
+
+func TestDeltaE(t *testing.T) {
+	rgb1 := color.RGBA{0, 166, 136, 1}
+	rgb2 := color.RGBA{0, 166, 137, 1}
+
+	c1 := cie.LabFromRGB(rgb1)
+	c2 := cie.LabFromRGB(rgb2)
+
+	if cie.DeltaE(c1, c2) > cie.DeltaEJND {
+		t.Error("DeltaE is too large")
+	}
+}

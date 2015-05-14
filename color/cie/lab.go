@@ -34,9 +34,17 @@ func LabFromXYZ(c XYZ) Lab {
 	}
 }
 
+func DeltaE(c1, c2 Lab) float64 {
+	lDiff := math.Pow(c2.L-c1.L, 2)
+	aDiff := math.Pow(c2.A-c1.A, 2)
+	bDiff := math.Pow(c2.B-c1.B, 2)
+	return math.Sqrt(lDiff + aDiff + bDiff)
+}
+
 const (
-	epsilon float64 = 0.008856
-	kappa   float64 = 903.3
+	DeltaEJND float64 = 2.3
+	epsilon   float64 = 0.008856
+	kappa     float64 = 903.3
 )
 
 func convertLabFromXYZ(v float64) float64 {
