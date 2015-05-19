@@ -9,6 +9,8 @@ import (
 
 const ColorMapBase int = 256
 
+type ColorBase int
+
 type ColorCounts map[color.RGBA]uint
 
 type ColorMap [ColorMapBase]ColorCounts
@@ -22,11 +24,11 @@ func (cmap *ColorMap) Add(c color.RGBA) {
 	cmap[base][c]++
 }
 
-func (cmap *ColorMap) Get(i int) ColorCounts {
+func (cmap *ColorMap) Get(i ColorBase) ColorCounts {
 	return cmap[i]
 }
 
-func (cmap *ColorMap) ColorTotalAt(i int) uint {
+func (cmap *ColorMap) ColorTotalAt(i ColorBase) uint {
 	var count uint = 0
 	for _, c := range cmap.Get(i) {
 		count += c

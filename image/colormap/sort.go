@@ -4,34 +4,34 @@ import (
 	"sort"
 )
 
-func (cmap *ColorMap) SortedIndexes() []int {
-	sortedIndexes := make([]int, len(cmap))
+func (cmap *ColorMap) SortedBases() []ColorBase {
+	sortedBases := make([]ColorBase, len(cmap))
 	for i := range cmap {
-		sortedIndexes[i] = i
+		sortedBases[i] = ColorBase(i)
 	}
 	sorter := colorMapSorter{
-		Cmap:          *cmap,
-		SortedIndexes: sortedIndexes,
+		Cmap:        *cmap,
+		SortedBases: sortedBases,
 	}
 
 	sort.Sort(sorter)
-	return sorter.SortedIndexes
+	return sorter.SortedBases
 }
 
 type colorMapSorter struct {
-	Cmap          ColorMap
-	SortedIndexes []int
+	Cmap        ColorMap
+	SortedBases []ColorBase
 }
 
 func (s colorMapSorter) Len() int {
-	return len(s.SortedIndexes)
+	return len(s.SortedBases)
 }
 
 func (s colorMapSorter) Swap(i, j int) {
-	s.SortedIndexes[i], s.SortedIndexes[j] = s.SortedIndexes[j], s.SortedIndexes[i]
+	s.SortedBases[i], s.SortedBases[j] = s.SortedBases[j], s.SortedBases[i]
 }
 
 func (s colorMapSorter) Less(i, j int) bool {
 	// We need to sort largest to smallest
-	return s.Cmap.ColorTotalAt(s.SortedIndexes[j]) < s.Cmap.ColorTotalAt(s.SortedIndexes[i])
+	return s.Cmap.ColorTotalAt(s.SortedBases[j]) < s.Cmap.ColorTotalAt(s.SortedBases[i])
 }
