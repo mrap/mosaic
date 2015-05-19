@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"testing"
 
-	. "github.com/mrap/mosaic/image/colormap"
+	. "github.com/mrap/mosaic/colormap"
 )
 
 func TestSortedBases(t *testing.T) {

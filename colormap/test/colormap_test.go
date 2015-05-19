@@ -4,8 +4,8 @@ import (
 	"image"
 	"testing"
 
+	. "github.com/mrap/mosaic/colormap"
 	. "github.com/mrap/mosaic/image"
-	. "github.com/mrap/mosaic/image/colormap"
 )
 
 func imageColorMap(filepath string) (*ColorMap, image.Image) {
