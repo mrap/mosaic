@@ -35,14 +35,6 @@ func (cmap *ColorMap) Get(i ColorBase) ColorCounts {
 	return cmap.Bases[i]
 }
 
-func (cmap *ColorMap) ColorTotalAt(i ColorBase) uint {
-	var count uint = 0
-	for _, c := range cmap.Get(i) {
-		count += c
-	}
-	return count
-}
-
 func NewColorMap(img image.Image) *ColorMap {
 	cmap := new(ColorMap)
 
