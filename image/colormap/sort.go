@@ -5,8 +5,8 @@ import (
 )
 
 func (cmap *ColorMap) SortedBases() []ColorBase {
-	sortedBases := make([]ColorBase, len(cmap))
-	for i := range cmap {
+	sortedBases := make([]ColorBase, len(cmap.Bases))
+	for i := range cmap.Bases {
 		sortedBases[i] = ColorBase(i)
 	}
 	sorter := colorMapSorter{

@@ -16,6 +16,13 @@ func imageColorMap(filepath string) (*ColorMap, image.Image) {
 	return NewColorMap(img), img
 }
 
+func TestColorsCount(t *testing.T) {
+	cmap, img := imageColorMap("images/color_black.jpeg")
+	if cmap.TotalColors != PixelsCount(img) {
+		t.Error("ColorMap doesn't have correct number of TotalColors")
+	}
+}
+
 func TestCreateFromImage(t *testing.T) {
 	cmap, _ := imageColorMap("images/color_black.jpeg")
 	if len(cmap.Get(0)) == 0 {
