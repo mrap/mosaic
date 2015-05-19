@@ -16,7 +16,7 @@ func (cmap *ColorMap) TopColorBases(minPercent float32) []ColorBase {
 
 	var topBases []ColorBase
 
-	var totalColors float32 = float32(cmap.TotalColors)
+	totalColors := float32(cmap.TotalColors)
 
 OuterLoop:
 	for _, b := range cmap.SortedBases() {
