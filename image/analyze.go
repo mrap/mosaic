@@ -19,7 +19,7 @@ func AvgRGBA(img image.Image) color.RGBA {
 		}
 	}
 
-	pixels := float32((bounds.Max.X - bounds.Min.X) * (bounds.Max.Y - bounds.Min.Y))
+	pixels := float32(PixelsCount(img))
 
 	return color.RGBA{
 		uint8(float32(_r) / pixels),

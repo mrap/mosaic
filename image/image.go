@@ -19,3 +19,7 @@ func ImageFromFile(filePath string) (image.Image, error) {
 		return img, err
 	}
 }
+
+func PixelsCount(img image.Image) uint {
+	return uint((img.Bounds().Max.X - img.Bounds().Min.X) * (img.Bounds().Max.Y - img.Bounds().Min.Y))
+}
