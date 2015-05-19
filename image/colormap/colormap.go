@@ -7,20 +7,23 @@ import (
 	libcolor "github.com/mrap/mosaic/color"
 )
 
-const ColorMapBase int = 256
+const (
+	ColorMapBase int    = 255
+	MaxRGB       uint32 = uint32(0xFFFF)
+)
 
 type ColorBase int
 
 type ColorCounts map[color.RGBA]uint
 
 type ColorMap struct {
-	Bases       [ColorMapBase]ColorCounts
+	Bases       [ColorMapBase + 1]ColorCounts
 	TotalColors uint
 }
 
 func (cmap *ColorMap) Add(c color.RGBA) {
-	hexVal := libcolor.HexValue(c)
-	base := hexVal % uint32(ColorMapBase)
+	hexVal := libcolor.HexValue(c) & MaxRGB
+	base := hexVal * uint32(ColorMapBase) / MaxRGB
 	if cmap.Bases[base] == nil {
 		cmap.Bases[base] = make(ColorCounts)
 	}
