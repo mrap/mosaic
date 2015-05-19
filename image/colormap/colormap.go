@@ -40,12 +40,12 @@ func NewColorMap(img image.Image) *ColorMap {
 	bounds := img.Bounds()
 	for y := bounds.Min.Y; y < bounds.Max.Y; y++ {
 		for x := bounds.Min.X; x < bounds.Max.X; x++ {
-			r, g, b, a := img.At(x, y).RGBA()
+			r, g, b, _ := img.At(x, y).RGBA()
 			cmap.Add(color.RGBA{
-				A: uint8(a >> 8 & 0xFF),
-				R: uint8(r >> 8 & 0xFF),
-				G: uint8(g >> 8 & 0xFF),
-				B: uint8(b >> 8 & 0xFF),
+				R: uint8(r >> 8),
+				G: uint8(g >> 8),
+				B: uint8(b >> 8),
+				A: 0,
 			})
 		}
 	}
