@@ -1,9 +1,13 @@
 package colormap
 
+import (
+	"image/color"
+
+	"github.com/mrap/mosaic/unit"
+)
+
 func (cmap *ColorMap) TopColorBases(minPercent float32) []ColorBase {
-	if minPercent > 1 {
-		minPercent /= 100
-	}
+	minPercent = unit.Percentage(minPercent)
 
 	var topBases []ColorBase
 
