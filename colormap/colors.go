@@ -5,11 +5,7 @@ import (
 )
 
 func (cmap *ColorMap) ColorTotalAt(i ColorBase) uint {
-	var count uint = 0
-	for _, c := range cmap.Get(i) {
-		count += c
-	}
-	return count
+	return cmap.baseTotal[i]
 }
 
 func (cmap *ColorMap) AvgColorAt(i ColorBase) color.RGBA {

@@ -18,6 +18,7 @@ type ColorCounts map[color.RGBA]uint
 type ColorMap struct {
 	Bases       [ColorMapBase + 1]ColorCounts
 	TotalColors uint
+	baseTotal   [ColorMapBase + 1]uint
 }
 
 func (cmap *ColorMap) Add(c color.RGBA) {
@@ -27,6 +28,7 @@ func (cmap *ColorMap) Add(c color.RGBA) {
 		cmap.Bases[base] = make(ColorCounts)
 	}
 	cmap.Bases[base][c]++
+	cmap.baseTotal[base]++
 	cmap.TotalColors++
 }
 
