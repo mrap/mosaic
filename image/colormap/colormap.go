@@ -9,18 +9,20 @@ import (
 
 const ColorMapBase int = 256
 
-type ColorMap [ColorMapBase]map[color.RGBA]uint
+type ColorCounts map[color.RGBA]uint
+
+type ColorMap [ColorMapBase]ColorCounts
 
 func (cmap *ColorMap) Add(c color.RGBA) {
 	hexVal := libcolor.HexValue(c)
 	base := hexVal % uint32(ColorMapBase)
 	if cmap[base] == nil {
-		cmap[base] = make(map[color.RGBA]uint)
+		cmap[base] = make(ColorCounts)
 	}
 	cmap[base][c]++
 }
 
-func (cmap *ColorMap) Get(i int) map[color.RGBA]uint {
+func (cmap *ColorMap) Get(i int) ColorCounts {
 	return cmap[i]
 }
 
