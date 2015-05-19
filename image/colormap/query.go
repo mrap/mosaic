@@ -2,8 +2,13 @@ package colormap
 
 import (
 	"image/color"
+	"math"
 
 	"github.com/mrap/mosaic/unit"
+)
+
+const (
+	minColorBaseDist = (ColorMapBase + 1) / 16
 )
 
 func (cmap *ColorMap) TopColorBases(minPercent float32) []ColorBase {
@@ -13,10 +18,19 @@ func (cmap *ColorMap) TopColorBases(minPercent float32) []ColorBase {
 
 	var totalColors float32 = float32(cmap.TotalColors)
 
+OuterLoop:
 	for _, b := range cmap.SortedBases() {
 		if float32(cmap.ColorTotalAt(b))/totalColors < minPercent {
 			break
 		}
+
+		// Ensure minimum distance rule to give a more definitive distribution
+		for _, tb := range topBases {
+			if int(math.Abs(float64(tb-b))) < minColorBaseDist {
+				continue OuterLoop
+			}
+		}
+
 		topBases = append(topBases, b)
 	}
 	return topBases
